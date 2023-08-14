@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text control</title>
+    <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container p-5">
+        <h1 id="textField"></h1>
+    </div>
+    <div class="container border border-primary p-5">
+        <div class="row">
+            <div class="col">
+                Text <textarea name="" id="textInput" cols="" rows="" class="form-control"></textarea>
+               
+            </div>
+            <div class="col">
+               Color <input type="color" class="form-control form-control-color w-100" id="color">
+            </div>
+            <div class="col">
+                Font Size <input type="range" name="" id="fontInput" class="form-control">
+            </div>
+            <div class="col">
+                Font Style <select name="font-family" id="fontFamilyInput" class="form-select">
+                    <option>select font-family</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <script>
+
+        var fonts=["Arial","Times New Roman","Garamond"];
+        //selector
+        
+        const textField=document.querySelector("#textField");
+
+        const textInput=document.querySelector("#textInput");
+        const color=document.querySelector("#color");
+        const fontInput=document.querySelector("#fontInput");
+        const fontFamilyInput=document.querySelector("#fontFamilyInput");
+
+        //text
+        textInput.addEventListener('keyup',event=>{
+           textField.innerText=textInput.value;
+        })
+        //color
+        color.addEventListener('change',event=>{
+           textField.style.color=event.target.value;
+        })
+        
+      //font size
+      fontInput.addEventListener('change',event=>{
+        textField.style.fontSize=event.target.valueAsNumber+"px";
+      })        
+  
+      //font family
+      fonts.forEach((font)=>{
+       fontFamilyInput.append(new Option(font,font));
+      
+      })
+      fontFamilyInput.addEventListener('change',event=>{
+        textField.style.fontFamily=event.target.value;
+      })
+    </script>
+
+    <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
