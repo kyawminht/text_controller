@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text control</title>
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css">
+
 </head>
 <body>
     <div class="container p-5">
-        <h1 id="textField"></h1>
+        <div class="d-flex align-items-center">
+           <button class="btn btn-outline-info" id="textToSpeechBtn">
+            <i class="bi bi-volume-up"></i>
+           </button>
+            <h1 id="textField">Text here</h1>
+        </div>
     </div>
     <div class="container border border-primary p-5">
         <div class="row">
@@ -40,7 +47,16 @@
         const color=document.querySelector("#color");
         const fontInput=document.querySelector("#fontInput");
         const fontFamilyInput=document.querySelector("#fontFamilyInput");
+        const textToSpeechBtn=document.querySelector("#textToSpeechBtn");
 
+        //text to speech function
+        const synth=window.speechSynthesis;
+        const speak=(text)=>{
+            const utterRance=new SpeechSynthesisUtterance(text);
+            synth.speak(utterRance);
+        }
+
+     
         //text
         textInput.addEventListener('keyup',event=>{
            textField.innerText=textInput.value;
@@ -63,8 +79,16 @@
       fontFamilyInput.addEventListener('change',event=>{
         textField.style.fontFamily=event.target.value;
       })
+
+      //text to speech
+
+      textToSpeechBtn.addEventListener("click",() => {
+        speak(textInput.value );
+      })
     </script>
 
     <script src="./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+   
+
 </body>
 </html>
